@@ -2,7 +2,7 @@ export type AttributeNames = "STR" | "PER" | "END" | "CHA" | "INT" | "AGI" | "LC
 
 export type LevelLabel = "Dweller" | "Explorer" | "Ranger" | "Knight" | "Paladin" | "Overseer"
 
-export interface ActivityLog {
+export type ActivityLog = {
     id: string;        // UUID para identificar unicamente
     date: Date;
     type: 'XP' | 'TASK' | 'MANUAL'; // Diferencia treino de tarefa
@@ -12,14 +12,14 @@ export interface ActivityLog {
     isHard?: boolean;  // Para tasks #hard
 }
 
-export interface User {
+export type User = {
     name: string,
     attributes: Record<AttributeNames, number>,
     activityLogs: ActivityLog[],
     currentCaps: number
 }
 
-export interface Attribute {
+export type Attribute = {
     name: AttributeNames,
     currentXp: number,
     xpToNextLevel: number,
@@ -28,8 +28,7 @@ export interface Attribute {
     overdrive: boolean,
 }
 
-export interface GameState {
+export type GameState = {
     caps: number;
     xpHistory: Record<AttributeNames, number>; // Total acumulado de XP por atributo
-    // Adicione aqui outros estados se achar necessário (ex: data da ultima atualização)
 }
