@@ -8,12 +8,14 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
-    "target": "esnext",
-    "types": [],
+    "target": "es2024",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
     "baseUrl": ".", // This is often the project root
     "paths": {
       "@/*": ["./src/*"],
     },
+    "typeRoots": ["node_modules/@types"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -45,5 +47,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "noImplicitAny": true,
+    "useUnknownInCatchVariables": false
   }
 }

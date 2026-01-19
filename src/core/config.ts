@@ -3,3 +3,5 @@ export const CONFIG = {
     OVERTIME_RATE: 5,     
     WEEKLY_SOFT_CAP: 250 
 }
+
+export const JSON_DB_PATH = "@/db.json"

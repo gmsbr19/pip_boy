@@ -32,3 +32,7 @@ export type GameState = {
     caps: number;
     xpHistory: Record<AttributeNames, number>; // Total acumulado de XP por atributo
 }
+
+export function isGameState(value: unknown):value is GameState {
+    return (value as GameState).caps === undefined
+}
