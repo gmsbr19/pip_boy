@@ -1,6 +1,6 @@
 import { CONFIG } from '@/core/config.js';
 
-function calculateCapsIncomeFromActivity(_xpGainedFromActivity:number, _currentWeekXp: number): number {
+export function calculateCapsIncomeFromActivity(_xpGainedFromActivity:number, _currentWeekXp: number): number {
     const richXpWindow = Math.max(CONFIG.WEEKLY_SOFT_CAP - _currentWeekXp, 0)
 
     if (_xpGainedFromActivity <= richXpWindow) {
