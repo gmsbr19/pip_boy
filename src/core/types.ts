@@ -26,7 +26,6 @@ export interface Attribute {
     currentLevelLabel: LevelLabel,
     currentLevel: number,
     overdrive: boolean,
-    xpGainedThisWeek: number
 }
 
 export interface GameState {
