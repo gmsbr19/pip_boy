@@ -1,1 +1,0 @@
-console.log("Sistema Pip-Boy v4.2 Iniciado...")
