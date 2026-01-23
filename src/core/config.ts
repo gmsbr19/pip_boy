@@ -4,4 +4,4 @@ export const CONFIG = {
     WEEKLY_SOFT_CAP: 250 
 }
 
-export const JSON_DB_PATH = "@/db.json"
+export const JSON_DB_PATH = "./db.json"
