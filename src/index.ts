@@ -1,20 +1,34 @@
-import { calculateCapsIncomeFromActivity } from './modules/economy/index.js'
+import type { GameState } from './core/types.js'
+import { JsonRepository } from './infra/storage/json-repository.js'
+import { calculateCapsIncomeFromActivity } from './modules/economy/index.js' // Verifique se o nome está certo
 
-console.log("Sistema Pip-Boy v6.0 Iniciado...")
+async function main() {
+    try {
+        const repository = new JsonRepository()
+        
+        console.log("📂 Carregando dados...")
+        const gameState = await repository.loadData()
 
-console.log("Iniciando caso de teste: XP Semanal = 0 xp e XP de atividade = 100 xp")
+        console.log("🎮 Simulando jogabilidade...")
+        gameState.caps += -90
+        gameState.xpHistory.LCK += 90
 
-const semana1 = calculateCapsIncomeFromActivity(100, 0)
+        console.log("💾 Salvando...")
+        await repository.saveData(gameState)
 
-console.log(semana1)
+        console.log("💪 Simulando treino...")
+        // ATENÇÃO: Verifique se sua função calculateCapsIncomeFromActivity aceita (number, number)
+        const renda = calculateCapsIncomeFromActivity(45, gameState.xpHistory.STR) 
+        gameState.caps += renda
+        gameState.xpHistory.STR += 45
 
-console.log("Iniciando caso de teste: XP Semanal = 240 xp e XP de atividade = 20 xp")
+        await repository.saveData(gameState)
 
-const semana2 = calculateCapsIncomeFromActivity(20, 240)
+        console.log("✅ Estado Final:", gameState)
 
-console.log(semana2)
-console.log("Iniciando caso de teste: XP Semanal = 300 xp e XP de atividade = 50 xp")
+    } catch (error) {
+        console.error("🔥 ERRO FATAL:", error.message || error)
+    }
+}
 
-const semana3 = calculateCapsIncomeFromActivity(50, 300)
-
-console.log(semana3)
+main()
