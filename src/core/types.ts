@@ -1,4 +1,6 @@
-export type AttributeNames = "STR" | "PER" | "END" | "CHA" | "INT" | "AGI" | "LCK"
+export const VALID_ATTRIBUTE_NAMES = ["STR", "PER", "END", "CHA", "INT", "AGI", "LCK"] as const;
+
+export type AttributeNames = typeof VALID_ATTRIBUTE_NAMES[number]
 
 export type LevelLabel = "Dweller" | "Explorer" | "Ranger" | "Knight" | "Paladin" | "Overseer"
 
@@ -50,4 +52,19 @@ export function isGameState(value: unknown): value is GameState {
     const hasHistory = typeof candidate.xpHistory === 'object' && candidate.xpHistory !== null;
 
     return hasCaps && hasHistory;
+}
+
+export function isAttributeName(value:string): value is AttributeNames {
+    if (value === null) {
+        return false;
+    }
+
+    return VALID_ATTRIBUTE_NAMES.includes(value as AttributeNames)
+}
+
+export type ParsedLog = {
+    originalInput: string,
+    cleanDescription: string,
+    attributes: Partial<Record<AttributeNames, number>>
+
 }
