@@ -33,6 +33,21 @@ export type GameState = {
     xpHistory: Record<AttributeNames, number>; // Total acumulado de XP por atributo
 }
 
-export function isGameState(value: unknown):value is GameState {
-    return (value as GameState).caps === undefined
+export function isGameState(value: unknown): value is GameState {
+    // 1. Verificação básica: É um objeto e não é nulo?
+    if (typeof value !== 'object' || value === null) {
+        return false;
+    }
+
+    // Fazemos um "cast" temporário só para o TS deixar a gente ler as propriedades
+    const candidate = value as Record<string, any>;
+
+    // 2. Verificação de Propriedades Obrigatórias
+    // "caps" existe E é um número?
+    const hasCaps = typeof candidate.caps === 'number';
+    
+    // "xpHistory" existe E é um objeto?
+    const hasHistory = typeof candidate.xpHistory === 'object' && candidate.xpHistory !== null;
+
+    return hasCaps && hasHistory;
 }
